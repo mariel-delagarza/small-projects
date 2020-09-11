@@ -1,0 +1,41 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!--UTF-8 is the default character set for HTML5.-->
+    <meta charset="utf-8">
+
+    <!--This accounts for IE, telling it to use the latest 
+        version instead of "Compatability View"-->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--Defines the title of the document. You'll see it in the
+        browser toolbar, favorites, search engine results-->
+    <title>It's the Final Countdown</title>
+
+    <!--"description" is an element that summarizes your page. Typically
+        shown in search results below title. -->
+    <meta name="description" content="Tutorial for Building a Countdown Timer with HTML, CSS, and vanilla JS">
+
+    <!--Include on every page - sets width of page to follow the screen 
+        width of the device and the zoom level on first load.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Include Project Fonts and Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/countdown.css" />
+    
+  </head>
+  <body>
+    <input type="date" id="datefield">
+    <button id="submit">Submit</button>
+    <div id="timer-container">
+      <p class="number" id="timerDays"></p>
+      <p class="number" id="timerHours"></p>
+      <p class="number" id="timerMinutes"></p>
+      <p class="number" id="timerSeconds"></p>    
+    </div>
+    <!--Include project specific JS files-->
+    <script src="js/countdown.js"></script>
+  </body>
+</html>
