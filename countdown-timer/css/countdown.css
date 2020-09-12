@@ -1,8 +1,18 @@
-body {
-  background-image: url("https://images.unsplash.com/photo-1425036458755-dc303a604201?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1942&q=80");
+body, html {
+  height: 100%;
 }
 
-#outerContainer  { 
+body {
+  background-image: url("https://images.unsplash.com/photo-1425036458755-dc303a604201?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1942&q=80");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+#outerContainer  {
   display: grid;
   grid-template-columns: 1fr;
   align-items: start;
@@ -24,14 +34,17 @@ header {
 
 h1 {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 2rem;
+  font-size: 32px;
   color: white;
   text-align: center;
 }
 
 #instructions {
   font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
+  font-size: 16px;
   color: white;
+  margin: 1rem;
 }
 
 #input-container {
@@ -59,6 +72,6 @@ button:hover {
 
 .number {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 3rem;
+  font-size: 32px;
   color: white;
 }
