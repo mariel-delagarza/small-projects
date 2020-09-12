@@ -23,18 +23,29 @@
 
     <!-- Include Project Fonts and Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/countdown.css" />
     
   </head>
   <body>
-    <input type="date" id="datefield">
-    <button id="submit">Submit</button>
-    <div id="timer-container">
-      <p class="number" id="timerDays"></p>
-      <p class="number" id="timerHours"></p>
-      <p class="number" id="timerMinutes"></p>
-      <p class="number" id="timerSeconds"></p>    
-    </div>
+    <main id="outerContainer">
+      <header>
+        <h1>It's the Final Countdown</h1>
+        <p id="instructions">Select a date below and click "submit" to start the countdown timer.</p>
+        <div id="input-container">
+          <input type="date" id="datefield">
+          <button id="submit">Submit</button>
+          <button id="reset">Reset</button>
+        </div>
+      </header>
+      <div id="timer-container">
+        <p class="number" id="timerDays"></p>
+        <p class="number" id="timerHours"></p>
+        <p class="number" id="timerMinutes"></p>
+        <p class="number" id="timerSeconds"></p>    
+      </div>
+    </main>
+
     <!--Include project specific JS files-->
     <script src="js/countdown.js"></script>
   </body>
