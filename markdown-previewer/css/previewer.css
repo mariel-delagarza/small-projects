@@ -1,0 +1,61 @@
+#outerContainer {
+  display: grid;
+  grid-gap: .5rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  grid-column: 1/-1;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  color: #000;
+  font-size: 25px;
+  font-weight: 400;
+  text-align: center;
+}
+
+#instructions {
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+}
+
+#inputContainer {
+  grid-column: 1;
+  grid-row: 2 / 4;
+  margin: auto;
+  width: 400px;
+  height: 49vh;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#input {
+  width: 400px;
+  padding: 0;
+  height: 50vh;
+  border: 5px solid #6320EE;
+  font-family: 'Cutive Mono', monospace;
+}
+
+#preview {
+  border: 5px solid #6320EE;
+  grid-column: 2;
+  grid-row: 2 / 4;
+  margin: auto;
+  width: 400px;
+  height: 50vh;
+  font-family: 'Poppins', sans-serif;
+  overflow: auto;
+  text-align: left;
+}
+
+p {
+  margin-top: 0;
+}
