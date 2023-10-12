@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap');
+
+body {
+  background-image: url(background.jpg) 
+}
+
+#title {
+  font-family: 'Amatic SC', cursive;
+  font-size: 3rem;
+  color: white;
+  margin: auto;
+  text-align: center;
+}
+
+.square {
+  display: inline-block;    
+  border: 1px solid rgba(255,255,255, 0.3);
+  width: 63px;
+  height: 63px;
+  margin-left: -1px;
+  margin-bottom: -1px;
+}
+
+.off {
+  background-color: transparent;
+}
+
+.on {
+  background-color: #f5d742;
+  opacity: .8;
+}
+
+.square:hover {
+  background: #f5ef42
+}
+
+.center {
+  margin: auto;
+  display: table;
+  margin-top: 10px;
+}
+
+#reset-button {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-family: 'Amatic SC', cursive;
+  background-color: lightgoldenrodyellow;
+  border: 0;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.grid {
+  line-height: 0;
+  margin: auto;
+  box-shadow: 0px 0px 20px white;
+  margin-top: 20px;
+}
+
+.game-info {
+  font-family: 'Amatic SC', cursive;
+  font-size: 2rem;
+  color: white;
+  margin: auto;
+  text-align: center;
+}
