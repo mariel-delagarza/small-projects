@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabs Folder UI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="folder">
+    <div class="tabs">
+      <button class="tab active" onclick="openTab(event, 'tab-1')">
+        <div><span>Work stuff</span></div>
+      </button>
+      <button class="tab" onclick="openTab(event, 'tab-2')">
+        <div><span>Food</span></div>
+      </button>
+      <button class="tab" onclick="openTab(event, 'tab-3')">
+        <div><span>Baking</span></div>
+      </button>
+      <button class="tab" onclick="openTab(event, 'tab-4')">
+        <div><span>Cat</span></div>
+      </button>
+      <button class="tab" onclick="openTab(event, 'tab-5')">
+        <div><span>More</span></div>
+      </button>
+    </div>
+
+    <div class="content">
+      <div id="tab-1" class="content__inner" style="display: block;">
+        <div class="page">
+        </div>
+      </div>
+      <div id="tab-2" class="content__inner">
+        <div class="page">
+        </div>
+      </div>
+      <div id="tab-3" class="content__inner">
+        <div class="page">
+        </div>
+      </div>
+      <div id="tab-4" class="content__inner">
+        <div class="page">
+        </div>
+      </div>
+      <div id="tab-5" class="content__inner">
+        <div class="page">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folder Lift & Open</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f2f2f2;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1000px;
+        font-family: sans-serif;
+      }
+
+      .folder-container {
+        position: relative;
+        width: 30rem;
+        height: 40rem;
+        margin: 2em auto;
+        overflow: visible;
+        cursor: pointer;
+        transition: all 0.5s linear;
+        transform-style: preserve-3d;
+        transform: rotate(-90deg);
+        transform-origin: bottom left;
+      }
+
+      /* 
+      .folder-container.upright {
+        transform: rotateX(0deg) rotate(0deg) translateX(20rem);
+      } */
+
+      /* Phase 1: Lift */
+      .folder-container.lifted {
+        transform: rotate(-90deg) translateX(10rem);
+        /* Pull up 5rem */
+      }
+
+      /* Phase 2: Rotate + Slide Right */
+      .folder-container.upright {
+        transform: rotate(0deg) translateY(-5rem) translateX(20rem);
+      }
+
+      .folder-back,
+      .folder-front {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+      }
+
+      .folder-back {
+        background: #d1b77c;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .folder-front {
+        background: linear-gradient(to right, #d1b77c 0%, #e2c88d 20%, #e2c88d 100%);
+
+        /* background: #e2c88d; */
+        transform-origin: left center;
+        transform: rotateY(0deg);
+        transition: transform 0.8s ease;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .folder-container.open .folder-front {
+        transform: rotateY(-180deg);
+        background: linear-gradient(to right, #d1b77c 0%, #e2c88d 20%, #e2c88d 100%);
+      }
+
+      .label {
+        position: absolute;
+        top: 45px;
+        right: -42px;
+        font-weight: bold;
+        font-size: 1.5rem;
+        transform: rotate(90deg);
+        background-color: #d1b77c;
+        z-index: 2;
+      }
+
+      .label::before,
+      .label::after {
+        content: "";
+        height: 100%;
+        position: absolute;
+        background: #d1b77c;
+        border-radius: 8px 8px 0 0;
+        width: 30px;
+        top: 0;
+        z-index: -1;
+      }
+
+      .label::before {
+        right: -16px;
+        transform: skew(25deg);
+        border-radius: 0 8px 0 0;
+      }
+
+      .label::after {
+        left: -16px;
+        transform: skew(-25deg);
+        border-radius: 8px 0 0 0;
+      }
+
+      .folder-wrapper {
+        /* Try 2x, adjust as needed */
+        transform-origin: bottom left;
+        /* Keeps the "spine" pinned */
+        margin-top: 15rem;
+      }
+
+      .page {
+        margin: 1rem;
+        max-width: 80%;
+        padding: 0.8rem;
+        border-radius: 2px;
+        min-height: 36em;
+        line-height: 160%;
+        background-size: 8% 8%, 2px 2px;
+        background-color: white;
+      }
+
+      .sticky-notes {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+        transform: scaleX(-1);
+      }
+
+      .sticky-note {
+        background: #fffb91;
+        color: #333;
+        width: 7rem;
+        height: 7rem;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border-radius: 4px;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+        transform: rotate(-3deg);
+      }
+
+      .note2 {
+        transform: rotate(-7deg);
+
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="folder-wrapper">
+      <div class="folder-container" id="folder">
+        <div class="folder-back">
+          <div class="label">BWC</div>
+          <div class="page"></div>
+        </div>
+        <div class="folder-front">
+          <div class="sticky-notes">
+            <div class="sticky-note note1">Reminder 1</div>
+            <div class="sticky-note note2">Don't forget!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const folder = document.getElementById('folder');
+      let isUpright = false;
+      let isOpen = false;
+      const stickyNotes = folder.querySelector('.sticky-notes');
+
+      folder.addEventListener('click', () => {
+        if (!isUpright) {
+
+          //step1 lift
+          folder.classList.add('lifted');
+
+          //step2 rotate and slide
+          setTimeout(() => {
+            folder.classList.add('upright');
+            isUpright = true;
+
+            // open after upright animation finishes
+            setTimeout(() => {
+              folder.classList.add('open');
+              isOpen = true;
+
+              // now delay the sticky notes visibility a little more
+              setTimeout(() => {
+                stickyNotes.style.opacity = '1';
+              }, 200); // adjust as needed
+            }, 800)
+          }, 500); // adjust as needed
+        } else if (isOpen) {
+          folder.classList.remove('open');
+          stickyNotes.style.opacity = '0'; // hide sticky notes
+          isOpen = false;
+
+          // wait for front to close before rotating back down
+          setTimeout(() => {
+            folder.classList.remove('upright');
+            folder.classList.remove('lifted');
+            isUpright = false;
+          }, 800);
+        }
+      });
+    </script>
+
+
+  </body>
+
+</html>
