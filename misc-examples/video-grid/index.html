@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Grid</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: #f9f9f9;
+        padding: 2rem;
+      }
+
+      .media-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 10px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .media-grid img,
+      .media-grid video {
+        width: 100%;
+        aspect-ratio: 3 / 4; /* or whatever ratio you want */
+        object-fit: cover;
+        display: block;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Media Grid Example</h1>
+    <div class="media-grid">
+      <img src="image1.png" alt="Cute kitten" />
+      <video src="video1.mp4" autoplay muted loop playsinline></video>
+      <img src="image2.png" alt="Cute kitten 2" />
+      <video src="video2.mp4" autoplay muted loop playsinline></video>
+      <video src="video3.mp4" autoplay muted loop playsinline></video>
+      <img src="image3.png" alt="Cute kitten 3" />
+      <img src="image4.png" alt="Cute kitten 4" />
+      <video src="video4.mp4" autoplay muted loop playsinline></video>
+    </div>
+  </body>
+</html>
