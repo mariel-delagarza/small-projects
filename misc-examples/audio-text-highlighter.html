@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Highlighting Example</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz@8..60&display=swap");
+
+      .main {
+        padding-top: 20px;
+        background: #15042f;
+      }
+
+      #container {
+        max-width: 680px;
+        margin: auto;
+      }
+
+      #audioParagraph,
+      #highlight {
+        color: #fff;
+        font-family: "Source Serif 4", serif;
+        font-size: 1.125rem;
+        line-height: 1.5;
+      }
+
+      .highlight-span {
+        padding: 0px 2px;
+        background: #9c8cb3;
+        border-radius: 4px;
+      }
+
+      #audioParagraph {
+        display: inline;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      @keyframes highlighter {
+        from {
+          background-position: 0;
+        }
+
+        to {
+          background-position: -100%;
+        }
+      }
+
+      .animate {
+        animation-name: highlighter;
+        animation-duration: 14.12s;
+        animation-direction: normal;
+        animation-timing-function: linear;
+        animation-play-state: paused;
+        background-size: 200%;
+        background-image: linear-gradient(to right, #9c8cb3, 50%, transparent 50%),
+          linear-gradient(#d3c6e6 50%, #d3c6e6 50%);
+      }
+
+      button {
+        display: inline-flex;
+        align-items: center;
+        border: 0;
+        padding: 4px 0 0 0;
+        background: transparent;
+        font-size: 1em;
+        line-height: 1.5;
+        vertical-align: top;
+      }
+
+      #myAudio {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body class="main">
+    <main>
+      <div id="container">
+        <p id="audioParagraph">
+          Ngujapeua said it’s “very important” for SWAPO to implement this style
+          of
+          party-state relations at the grassroots level. “We have to work hand
+          in
+          hand, the political party and the government.” The instructor
+        </p>
+        <span id="highlight" class="highlight-span">
+          <audio id="myAudio"
+            src="https://graphics.axios.com/2023-08-tanzania-school/audio/collin-clip-2.m4a"></audio>
+          <button onClick="play()" aria-label="Play or Pause audio">
+            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" width="1em"
+              height="1em" fill="none" viewBox="0 0 14 14"
+              class="svelte-13kaz8a">
+              <path fill="#000"
+                d="M12.131 6.025a1.126 1.126 0 0 1 0 1.95L3.69 12.849A1.126 1.126 0 0 1 2 11.874V2.126a1.126 1.126 0 0 1 1.689-.975l8.442 4.874Z">
+              </path>
+            </svg>
+            <svg id="pauseIcon" class="hide" xmlns="http://www.w3.org/2000/svg"
+              width="1em" height="1em" fill="none" viewBox="0 0 14 14"
+              class="svelte-13kaz8a">
+              <path fill="#000"
+                d="M6.103 11.45a1.55 1.55 0 0 1-3.103 0v-8.9a1.552 1.552 0 0 1 3.103 0v8.9ZM11.04 11.45a1.551 1.551 0 0 1-3.102 0v-8.9a1.551 1.551 0 0 1 3.101 0l.001 8.9Z">
+              </path>
+            </svg>
+          </button>
+          “told us we must solve our own problems. Instead of going to court,
+          instead of using judiciaries, … he said we must solve our own problems
+          internally.”
+        </span>
+      </div>
+    </main>
+    <script>
+      let isPlaying = false;
+      let highlight = document.getElementById("highlight");
+      let playIcon = document.getElementById("playIcon");
+      let pauseIcon = document.getElementById("pauseIcon");
+      let myAudio = document.getElementById("myAudio");
+
+      function pauseAudio() {
+        myAudio.pause();
+        playIcon.classList.remove("hide");
+        pauseIcon.classList.add("hide");
+        highlight.style.animationPlayState = "paused";
+        isPlaying = false;
+      }
+
+      function playAudio() {
+        myAudio.play();
+        highlight.classList.add("animate");
+        highlight.style.animationPlayState = "running";
+        playIcon.classList.add("hide");
+        pauseIcon.classList.remove("hide");
+        isPlaying = true;
+      }
+
+      function play() {
+        isPlaying ? pauseAudio() : playAudio();
+
+        console.log("click");
+      }
+
+      onanimationend = () => {
+        console.log("end");
+        highlight.classList.remove("animate");
+        void highlight.offsetHeight;
+        highlight.classList.add("animate");
+        highlight.style.animationPlayState = "paused";
+        pauseIcon.classList.add("hide");
+        playIcon.classList.remove("hide");
+        isPlaying = false;
+      };
+    </script>
+  </body>
+</html>

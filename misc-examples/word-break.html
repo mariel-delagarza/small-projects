@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Break Example</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f5f5f5;
+        font-family: "Source Sans 3", sans-serif;
+        overflow: hidden;
+        /* Prevent overflow */
+      }
+
+      .main-container {
+        min-width: 50vw;
+        /* Use viewport units */
+        max-width: 80vw;
+        /* Use viewport units */
+        min-height: 40vh;
+        /* Use viewport units */
+        max-height: 70vh;
+        /* Use viewport units */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        outline: 1px solid #000;
+        padding: 20px;
+        box-sizing: border-box;
+        /* Include padding and border in the width and height */
+      }
+
+      .title {
+        /* Responsive font size using viewport width */
+        font-size: 2rem;
+        word-break: keep-all;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+        text-align: center;
+        width: 100%;
+      }
+
+      @media screen and (max-width: 600px) {
+        .title {
+          word-break: break-all;
+          font-size: 1.5rem;
+          /* Adjust for smaller screens */
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <div class="main-container">
+        <h2 class="title">
+          I am a really long and inconvenient title about some foreign policy
+          thing
+        </h2>
+      </div>
+    </main>
+  </body>
+
+</html>
