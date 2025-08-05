@@ -1,0 +1,1 @@
+This map is from the tutorial ["Show changes over time with Mapbox GL JS"](https://docs.mapbox.com/help/tutorials/show-changes-over-time/)
