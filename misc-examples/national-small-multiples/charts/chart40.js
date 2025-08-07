@@ -1,6 +1,6 @@
 Highcharts.chart("chart40", {
   title: {
-    text: "",
+    text: "NM",
     align: "left",
   },
   legend: {

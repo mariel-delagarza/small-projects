@@ -1,6 +1,6 @@
 Highcharts.chart("chart32", {
   title: {
-    text: "",
+    text: "SD",
     align: "left",
   },
   legend: {

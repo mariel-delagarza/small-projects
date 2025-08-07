@@ -1,6 +1,6 @@
 Highcharts.chart("chart47", {
   title: {
-    text: "",
+    text: "OR",
     align: "left",
   },
   legend: {

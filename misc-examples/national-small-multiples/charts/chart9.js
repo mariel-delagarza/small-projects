@@ -1,6 +1,6 @@
 Highcharts.chart("chart9", {
   title: {
-    text: "",
+    text: "NJ",
     align: "left",
   },
   legend: {

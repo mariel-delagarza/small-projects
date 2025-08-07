@@ -1,6 +1,6 @@
 Highcharts.chart("chart46", {
   title: {
-    text: "",
+    text: "WA",
     align: "left",
   },
   legend: {

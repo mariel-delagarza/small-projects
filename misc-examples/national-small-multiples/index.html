@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rotate and Merge Charts</title>
+    <link rel="stylesheet" href="national-squares.css" />
     <style>
       * {
         box-sizing: border-box;
@@ -20,22 +21,14 @@
         overflow-x: hidden;
       }
 
-      /* .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 200px);
-        gap: 1rem;
-        position: relative;
-        transition: gap 0.8s ease-in-out;
-      } */
       .grid {
-        margin: 30rem auto 0 auto;
-      
         display: grid;
-        grid-template-columns: repeat(11, 60px);
-        /* adjust size as needed */
-        grid-template-rows: repeat(8, 60px);
-        gap: 4.5rem;
-        position: relative;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        gap: 0.5vw;
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
       }
 
       .grid.tight {
@@ -43,8 +36,8 @@
       }
 
       .chart {
-        width: 125px;
-        height: 125px;
+        width: 100%;
+        aspect-ratio: 1/1;;
         background: #fff;
         color: white;
         display: flex;
@@ -55,6 +48,7 @@
         transform-origin: center;
         position: relative;
         z-index: 2;
+        font-size: 0.9rem;
 
       }
 
@@ -96,8 +90,6 @@
       }
 
 
-      /* UNITED STATES LAYOUT */
-      #chart1 { grid-column: 1; grid-row: 1;} /* Alaska*/
       
     </style>
   </head>
@@ -153,6 +145,8 @@
       <div class="chart" id="chart46">Chart 46</div>
       <div class="chart" id="chart47">Chart 47</div>
       <div class="chart" id="chart48">Chart 48</div>
+      <div class="chart" id="chart49">Chart 49</div>
+      <div class="chart" id="chart50">Chart 50</div>
 
       <div id="big-chart">Big Chart</div>
     </div>
@@ -237,6 +231,8 @@
     <script src="charts/chart46.js"></script>
     <script src="charts/chart47.js"></script>
     <script src="charts/chart48.js"></script>
+    <script src="charts/chart49.js"></script>
+    <script src="charts/chart50.js"></script>
 
     <script src="bigchart.js"></script>
 

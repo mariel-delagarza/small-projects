@@ -1,6 +1,6 @@
 Highcharts.chart("chart7", {
   title: {
-    text: "",
+    text: "DE",
     align: "left",
   },
   legend: {

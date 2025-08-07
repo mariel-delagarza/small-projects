@@ -1,6 +1,6 @@
 Highcharts.chart("chart42", {
   title: {
-    text: "",
+    text: "ID",
     align: "left",
   },
   legend: {

@@ -1,6 +1,6 @@
 Highcharts.chart("chart37", {
   title: {
-    text: "",
+    text: "MT",
     align: "left",
   },
   legend: {

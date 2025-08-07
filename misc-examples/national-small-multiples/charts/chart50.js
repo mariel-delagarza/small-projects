@@ -1,6 +1,6 @@
-Highcharts.chart("chart10", {
+Highcharts.chart("chart50", {
   title: {
-    text: "MD",
+    text: "HI",
     align: "left",
   },
   legend: {
