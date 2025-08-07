@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rotate and Merge Charts</title>
     <link rel="stylesheet" href="national-squares.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
     <style>
       * {
         box-sizing: border-box;
@@ -107,58 +110,156 @@
   <body>
 
     <div class="grid" id="chartGrid">
-      <div class="chart" id="chart1">Chart 1</div>
-      <div class="chart" id="chart2">Chart 2</div>
-      <div class="chart" id="chart3">Chart 3</div>
-      <div class="chart" id="chart4">Chart 4</div>
-      <div class="chart" id="chart5">Chart 5</div>
-      <div class="chart" id="chart6">Chart 6</div>
-      <div class="chart" id="chart7">Chart 7</div>
-      <div class="chart" id="chart8">Chart 8</div>
-      <div class="chart" id="chart9">Chart 9</div>
-      <div class="chart" id="chart10">Chart 10</div>
-      <div class="chart" id="chart11">Chart 11</div>
-      <div class="chart" id="chart12">Chart 12</div>
-      <div class="chart" id="chart13">Chart 13</div>
-      <div class="chart" id="chart14">Chart 14</div>
-      <div class="chart" id="chart15">Chart 15</div>
-      <div class="chart" id="chart16">Chart 16</div>
-      <div class="chart" id="chart17">Chart 17</div>
-      <div class="chart" id="chart18">Chart 18</div>
-      <div class="chart" id="chart19">Chart 19</div>
-      <div class="chart" id="chart20">Chart 20</div>
-      <div class="chart" id="chart21">Chart 21</div>
-      <div class="chart" id="chart22">Chart 22</div>
-      <div class="chart" id="chart23">Chart 23</div>
-      <div class="chart" id="chart24">Chart 24</div>
-      <div class="chart" id="chart25">Chart 25</div>
-      <div class="chart" id="chart26">Chart 26</div>
-      <div class="chart" id="chart27">Chart 27</div>
-      <div class="chart" id="chart28">Chart 28</div>
-      <div class="chart" id="chart29">Chart 29</div>
-      <div class="chart" id="chart30">Chart 30</div>
-      <div class="chart" id="chart31">Chart 31</div>
-      <div class="chart" id="chart32">Chart 32</div>
-      <div class="chart" id="chart33">Chart 33</div>
-      <div class="chart" id="chart34">Chart 34</div>
-      <div class="chart" id="chart35">Chart 35</div>
-      <div class="chart" id="chart36">Chart 36</div>
-      <div class="chart" id="chart37">Chart 37</div>
-      <div class="chart" id="chart38">Chart 38</div>
-      <div class="chart" id="chart39">Chart 39</div>
-      <div class="chart" id="chart40">Chart 40</div>
-      <div class="chart" id="chart41">Chart 41</div>
-      <div class="chart" id="chart42">Chart 42</div>
-      <div class="chart" id="chart43">Chart 43</div>
-      <div class="chart" id="chart44">Chart 44</div>
-      <div class="chart" id="chart45">Chart 45</div>
-      <div class="chart" id="chart46">Chart 46</div>
-      <div class="chart" id="chart47">Chart 47</div>
-      <div class="chart" id="chart48">Chart 48</div>
+      <div class="chart" id="chart1">
+        <div class="chart-inner">Chart 1</div>
+      </div>
+      <div class="chart" id="chart2">
+        <div class="chart-inner">Chart 2</div>
+      </div>
+      <div class="chart" id="chart3">
+        <div class="chart-inner">Chart 3</div>
+      </div>
+      <div class="chart" id="chart4">
+        <div class="chart-inner">Chart 4</div>
+      </div>
+      <div class="chart" id="chart5">
+        <div class="chart-inner">Chart 5</div>
+      </div>
+      <div class="chart" id="chart6">
+        <div class="chart-inner">Chart 6</div>
+      </div>
+      <div class="chart" id="chart7">
+        <div class="chart-inner">Chart 7</div>
+      </div>
+      <div class="chart" id="chart8">
+        <div class="chart-inner">Chart 8</div>
+      </div>
+      <div class="chart" id="chart9">
+        <div class="chart-inner">Chart 9</div>
+      </div>
+      <div class="chart" id="chart10">
+        <div class="chart-inner">Chart 10</div>
+      </div>
+      <div class="chart" id="chart11">
+        <div class="chart-inner">Chart 11</div>
+      </div>
+      <div class="chart" id="chart12">
+        <div class="chart-inner">Chart 12</div>
+      </div>
+      <div class="chart" id="chart13">
+        <div class="chart-inner">Chart 13</div>
+      </div>
+      <div class="chart" id="chart14">
+        <div class="chart-inner">Chart 14</div>
+      </div>
+      <div class="chart" id="chart15">
+        <div class="chart-inner">Chart 15</div>
+      </div>
+      <div class="chart" id="chart16">
+        <div class="chart-inner">Chart 16</div>
+      </div>
+      <div class="chart" id="chart17">
+        <div class="chart-inner">Chart 17</div>
+      </div>
+      <div class="chart" id="chart18">
+        <div class="chart-inner">Chart 18</div>
+      </div>
+      <div class="chart" id="chart19">
+        <div class="chart-inner">Chart 19</div>
+      </div>
+      <div class="chart" id="chart20">
+        <div class="chart-inner">Chart 20</div>
+      </div>
+      <div class="chart" id="chart21">
+        <div class="chart-inner">chart 21</div>
+      </div>
+      <div class="chart" id="chart22">
+        <div class="chart-inner">chart 22</div>
+      </div>
+      <div class="chart" id="chart23">
+        <div class="chart-inner">chart 23</div>
+      </div>
+      <div class="chart" id="chart24">
+        <div class="chart-inner">chart 24</div>
+      </div>
+      <div class="chart" id="chart25">
+        <div class="chart-inner">chart 25</div>
+      </div>
+      <div class="chart" id="chart26">
+        <div class="chart-inner">chart 26</div>
+      </div>
+      <div class="chart" id="chart27">
+        <div class="chart-inner">chart 27</div>
+      </div>
+      <div class="chart" id="chart28">
+        <div class="chart-inner">Chart 28</div>
+      </div>
+      <div class="chart" id="chart29">
+        <div class="chart-inner">Chart 29</div>
+      </div>
+      <div class="chart" id="chart30">
+        <div class="chart-inner">Chart 30</div>
+      </div>
+      <div class="chart" id="chart31">
+        <div class="chart-inner">Chart 31</div>
+      </div>
+      <div class="chart" id="chart32">
+        <div class="chart-inner">Chart 32</div>
+      </div>
+      <div class="chart" id="chart33">
+        <div class="chart-inner">Chart 33</div>
+      </div>
+      <div class="chart" id="chart34">
+        <div class="chart-inner">Chart 34</div>
+      </div>
+      <div class="chart" id="chart35">
+        <div class="chart-inner">Chart 35</div>
+      </div>
+      <div class="chart" id="chart36">
+        <div class="chart-inner">Chart 36</div>
+      </div>
+      <div class="chart" id="chart37">
+        <div class="chart-inner">Chart 37</div>
+      </div>
+      <div class="chart" id="chart38">
+        <div class="chart-inner">Chart 38</div>
+      </div>
+      <div class="chart" id="chart39">
+        <div class="chart-inner">Chart 39</div>
+      </div>
+      <div class="chart" id="chart40">
+        <div class="chart-inner">Chart 40</div>
+      </div>
+      <div class="chart" id="chart41">
+        <div class="chart-inner">Chart 41</div>
+      </div>
+      <div class="chart" id="chart42">
+        <div class="chart-inner">Chart 42</div>
+      </div>
+      <div class="chart" id="chart43">
+        <div class="chart-inner">Chart 43</div>
+      </div>
+      <div class="chart" id="chart44">
+        <div class="chart-inner">Chart 44</div>
+      </div>
+      <div class="chart" id="chart45">
+        <div class="chart-inner">Chart 45</div>
+      </div>
+      <div class="chart" id="chart46">
+        <div class="chart-inner">Chart 46</div>
+      </div>
+      <div class="chart" id="chart47">
+        <div class="chart-inner">Chart 47</div>
+      </div>
+      <div class="chart" id="chart48">
+        <div class="chart-inner">Chart 48</div>
+      </div>
       <div class="chart" id="chart49">
         <div class="chart-inner">Chart 49</div>
       </div>
-      <div class="chart" id="chart50">Chart 50</div>
+      <div class="chart" id="chart50">
+        <div class="chart-inner">Chart 50</div>
+      </div>
 
       <div id="big-chart">Big Chart</div>
     </div>
@@ -293,36 +394,29 @@
         const targetLeft = (toCol - 1) * cellWidth;
         const targetTop = (toRow - 1) * cellHeight;
 
-        const dx = targetLeft - currentLeft;
-        const dy = targetTop - currentTop;
+        // Animate to target
+        gsap.to(chartEl, {
+          duration: 0.6,
+          x: targetLeft - currentLeft,
+          y: targetTop - currentTop,
+          ease: "power2.out",
+          onComplete: () => {
+            // Snap back into grid
+            chartEl.style.transition = "";
+            chartEl.style.transform = "";
+            chartEl.style.position = "";
+            chartEl.style.top = "";
+            chartEl.style.left = "";
+            chartEl.style.width = "";
+            chartEl.style.height = "";
+            chartEl.style.zIndex = "";
 
-        // Fix position temporarily
-        chartEl.style.position = "absolute";
-        chartEl.style.top = `${ currentTop }px`;
-        chartEl.style.left = `${ currentLeft }px`;
-        chartEl.style.width = `${ chartRect.width }px`;
-        chartEl.style.height = `${ chartRect.height }px`;
-        chartEl.style.transition = "transform 0.6s ease";
-        chartEl.style.zIndex = 10; // Make sure it's above others while animating
-
-        // Animate movement
-        chartEl.style.transform = `translate(${ dx }px, ${ dy }px)`;
-
-        // After animation, snap back into grid
-        setTimeout(() => {
-          chartEl.style.transition = "";
-          chartEl.style.transform = "";
-          chartEl.style.position = "";
-          chartEl.style.top = "";
-          chartEl.style.left = "";
-          chartEl.style.width = "";
-          chartEl.style.height = "";
-          chartEl.style.zIndex = "";
-
-          chartEl.style.gridColumnStart = toCol;
-          chartEl.style.gridRowStart = toRow;
-        }, 650); // match transition duration
+            chartEl.style.gridColumnStart = toCol;
+            chartEl.style.gridRowStart = toRow;
+          }
+        });
       }
+
 
     </script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
