@@ -1,28 +1,31 @@
 Highcharts.chart("chart50", {
   title: {
-    text: "HI",
+    text: 'HI',
     align: "left",
+    style: {
+      fontSize: '14px',
+      color: '#000'
+    }
   },
-  legend: {
-    enabled: false,
+  chart: {
+    backgroundColor: '#fff'
+  },
+  credits: {
+    enabled: false
   },
   subtitle: {
-    text: "",
+    text: '',
     align: "left",
   },
-
   yAxis: {
-    title: {
-      text: "",
-    },
+    visible: false
   },
-
   xAxis: {
-    accessibility: {
-      rangeDescription: "Range: 2010 to 2022",
-    },
+    visible: false
   },
-
+  legend: {
+    enabled: false
+  },
   plotOptions: {
     series: {
       label: {
@@ -31,31 +34,13 @@ Highcharts.chart("chart50", {
       pointStart: 2010,
     },
   },
-
   series: [
     {
-      name: "",
-      data: [40, 48, 65, 82, 33, 28, 67],
+      name: "Installation & Developers",
+      data: [
+        43934, 48656, 65165, 81827, 112143, 142383, 171533, 165174, 155157,
+        161454, 154610, 168960, 171558,
+      ],
     },
-  ],
-
-  credits: {
-    enabled: false,
-  },
-  responsive: {
-    rules: [
-      {
-        condition: {
-          maxWidth: 500,
-        },
-        chartOptions: {
-          legend: {
-            layout: "horizontal",
-            align: "center",
-            verticalAlign: "bottom",
-          },
-        },
-      },
-    ],
-  },
+  ]
 });

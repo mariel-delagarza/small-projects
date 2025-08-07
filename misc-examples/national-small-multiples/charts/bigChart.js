@@ -1,6 +1,6 @@
 Highcharts.chart("big-chart", {
   title: {
-    text: "ME",
+    text: "All States",
     align: "left",
   },
   legend: {
