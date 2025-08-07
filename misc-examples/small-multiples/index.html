@@ -63,15 +63,26 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 0;
+        /* opacity: 0;
         pointer-events: none;
         transition: opacity 0.2s ease-in-out;
+        z-index: 1; */
+        visibility: hidden;
+        /* still takes layout space */
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out, visibility 0s linear 0.2s;
         z-index: 1;
       }
 
       #big-chart.show {
+        /* opacity: 1;
+        pointer-events: auto;
+        z-index: 2; */
+        visibility: visible;
         opacity: 1;
         pointer-events: auto;
+        transition: opacity 0.5s ease-in-out;
         z-index: 2;
       }
 
