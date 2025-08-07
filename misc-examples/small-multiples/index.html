@@ -29,7 +29,6 @@
 
       .grid.tight {
         gap: 0;
-        /* remove spacing to merge into big chart */
       }
 
       .chart {
@@ -63,12 +62,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        /* opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease-in-out;
-        z-index: 1; */
         visibility: hidden;
-        /* still takes layout space */
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.2s ease-in-out, visibility 0s linear 0.2s;
@@ -76,9 +70,6 @@
       }
 
       #big-chart.show {
-        /* opacity: 1;
-        pointer-events: auto;
-        z-index: 2; */
         visibility: visible;
         opacity: 1;
         pointer-events: auto;
