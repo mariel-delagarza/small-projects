@@ -36,10 +36,10 @@
         gap: 0;
       }
 
+
       .chart {
         width: 100%;
         aspect-ratio: 1/1;
-        ;
         background: #fff;
         color: white;
         display: flex;
@@ -153,21 +153,80 @@
     </div>
 
     <button id="rotateBtn">Rotate + Merge</button>
+    <button id="moveOneBtn">Move Chart 49</button>
+    <button id="moveAllBtn">Move All Charts</button>
 
     <script>
       const grid = document.getElementById('chartGrid');
-      const btn = document.getElementById('rotateBtn');
+      const rotateBtn = document.getElementById('rotateBtn');
       const bigChart = document.getElementById('big-chart');
 
       let rotated = false;
 
-      btn.addEventListener('click', () => {
+      const squarePositions = {
+        "chart1": [12, 1, 8, 1],
+        "chart2": [12, 2, 9, 1],
+        "chart3": [12, 3, 10, 1],
+        "chart4": [11, 2, 11, 1],
+        "chart5": [11, 3, 11, 2],
+        "chart6": [11, 4, 10, 3],
+        "chart7": [11, 5, 11, 3],
+        "chart8": [10, 3, 10, 2],
+        "chart9": [10, 4, 9, 3],
+        "chart10": [10, 5, 11, 4],
+        "chart11": [10, 6, 10, 5],
+        "chart12": [10, 8, 11, 5],
+        "chart13": [9, 4, 9, 2],
+        "chart14": [9, 5, 10, 4],
+        "chart15": [9, 6, 9, 5],
+        "chart16": [9, 7, 8, 5],
+        "chart17": [8, 3, 8, 2],
+        "chart18": [8, 4, 8, 3],
+        "chart19": [8, 5, 9, 4],
+        "chart20": [8, 6, 8, 4],
+        "chart21": [8, 7, 7, 4],
+        "chart22": [7, 4, 7, 1],
+        "chart23": [7, 5, 7, 2],
+        "chart24": [7, 6, 7, 3],
+        "chart25": [7, 7, 6, 5],
+        "chart26": [6, 3, 6, 1],
+        "chart27": [6, 4, 6, 2],
+        "chart28": [6, 5, 6, 3],
+        "chart29": [6, 6, 6, 4],
+        "chart30": [6, 7, 5, 5],
+        "chart31": [5, 3, 5, 1],
+        "chart32": [5, 4, 5, 2],
+        "chart33": [5, 5, 5, 3],
+        "chart34": [5, 6, 5, 4],
+        "chart35": [5, 7, 4, 5],
+        "chart36": [5, 8, 7, 5],
+        "chart37": [4, 3, 4, 1],
+        "chart38": [4, 4, 4, 2],
+        "chart39": [4, 5, 4, 3],
+        "chart40": [4, 6, 4, 4],
+        "chart41": [4, 7, 3, 5],
+        "chart42": [3, 3, 3, 1],
+        "chart43": [3, 4, 3, 2],
+        "chart44": [3, 5, 3, 3],
+        "chart45": [3, 6, 3, 4],
+        "chart46": [2, 3, 2, 2],
+        "chart47": [2, 4, 2, 3],
+        "chart48": [2, 5, 2, 4],
+        "chart49": [1, 1, 2, 1],
+        "chart50": [1, 7, 2, 5]
+      }
+
+      const [originalCol, originalRow] = squarePositions["chart49"];
+      console.log(originalCol, originalRow);
+
+
+      rotateBtn.addEventListener('click', () => {
         rotated = !rotated;
 
         grid.classList.toggle('rotate', rotated);
         grid.classList.toggle('tight', rotated);
 
-        btn.textContent = rotated ? 'Undo Merge' : 'Rotate + Merge';
+        rotateBtn.textContent = rotated ? 'Undo Merge' : 'Rotate + Merge';
 
         if (rotated) {
           // Delay fade-in until right before the rotation ends
@@ -179,6 +238,109 @@
           bigChart.classList.remove('show');
         }
       });
+
+
+      /*Sliding Squares*/
+      const chart49 = document.getElementById("chart49");
+      const chartGrid = document.getElementById("chartGrid");
+      const moveOneBtn = document.getElementById('moveOneBtn');
+      const moveAllBtn = document.getElementById('moveAllBtn');
+
+
+      moveOneBtn.addEventListener('click', () => {
+        const originalCol = squarePositions.chart49[0];
+        const originalRow = squarePositions.chart49[1];
+        const [newCol, newRow] = [squarePositions.chart49[2], squarePositions.chart49[3]];
+        console.log("Moving Chart 49");
+        moveChartTo(chart49, originalCol, originalRow, newCol, newRow);
+      });
+
+      moveAllBtn.addEventListener('click', () => {
+        console.log("Moving All Charts");
+        Object.keys(squarePositions).forEach(chartId => {
+          const chartEl = document.getElementById(chartId);
+          if (!chartEl) return;
+
+          const originalCol = squarePositions[chartId][0];
+          const originalRow = squarePositions[chartId][1];
+          const newCol = squarePositions[chartId][2];
+          const newRow = squarePositions[chartId][3];
+
+          moveChartTo(chartEl, originalCol, originalRow, newCol, newRow);
+        });
+      });
+
+      // function moveChartTo(chartEl, fromCol, fromRow, toCol, toRow) {
+      //   const gridRect = chartGrid.getBoundingClientRect();
+      //   const chartRect = chartEl.getBoundingClientRect();
+
+      //   const currentLeft = chartRect.left - gridRect.left;
+      //   const currentTop = chartRect.top - gridRect.top;
+
+      //   chartEl.style.position = "absolute";
+      //   chartEl.style.top = `${ currentTop }px`;
+      //   chartEl.style.left = `${ currentLeft }px`;
+      //   chartEl.style.width = `${ chartRect.width }px`;
+      //   chartEl.style.height = `${ chartRect.height }px`;
+      //   chartEl.style.gridColumnStart = "";
+      //   chartEl.style.gridRowStart = "";
+
+      //   const cellWidth = chartGrid.offsetWidth / 12;
+      //   const cellHeight = chartGrid.offsetHeight / 8;
+
+      //   const targetLeft = (toCol - 1) * cellWidth;
+      //   const targetTop = (toRow - 1) * cellHeight;
+
+      //   const dx = targetLeft - currentLeft;
+      //   const dy = targetTop - currentTop;
+
+      //   chartEl.style.transition = "transform 0.6s ease";
+      //   chartEl.style.transform = `translate(${ dx }px, ${ dy }px)`;
+      // }
+      function moveChartTo(chartEl, fromCol, fromRow, toCol, toRow) {
+        const gridRect = chartGrid.getBoundingClientRect();
+        const chartRect = chartEl.getBoundingClientRect();
+
+        const currentLeft = chartRect.left - gridRect.left;
+        const currentTop = chartRect.top - gridRect.top;
+
+        const cellWidth = chartGrid.offsetWidth / 12;
+        const cellHeight = chartGrid.offsetHeight / 8;
+
+        const targetLeft = (toCol - 1) * cellWidth;
+        const targetTop = (toRow - 1) * cellHeight;
+
+        const dx = targetLeft - currentLeft;
+        const dy = targetTop - currentTop;
+
+        // Fix position temporarily
+        chartEl.style.position = "absolute";
+        chartEl.style.top = `${ currentTop }px`;
+        chartEl.style.left = `${ currentLeft }px`;
+        chartEl.style.width = `${ chartRect.width }px`;
+        chartEl.style.height = `${ chartRect.height }px`;
+        chartEl.style.transition = "transform 0.6s ease";
+        chartEl.style.zIndex = 10; // Make sure it's above others while animating
+
+        // Animate movement
+        chartEl.style.transform = `translate(${ dx }px, ${ dy }px)`;
+
+        // After animation, snap back into grid
+        setTimeout(() => {
+          chartEl.style.transition = "";
+          chartEl.style.transform = "";
+          chartEl.style.position = "";
+          chartEl.style.top = "";
+          chartEl.style.left = "";
+          chartEl.style.width = "";
+          chartEl.style.height = "";
+          chartEl.style.zIndex = "";
+
+          chartEl.style.gridColumnStart = toCol;
+          chartEl.style.gridRowStart = toRow;
+        }, 650); // match transition duration
+      }
+
     </script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -235,8 +397,6 @@
     <script src="charts/chart49.js"></script>
     <script src="charts/chart50.js"></script>
     <script src="charts/bigChart.js"></script>
-
-    <script src="bigchart.js"></script>
 
   </body>
 
