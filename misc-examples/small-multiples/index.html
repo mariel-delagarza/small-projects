@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rotate Charts</title>
+    <title>Rotate and Merge Charts</title>
     <style>
       * {
         box-sizing: border-box;
@@ -22,9 +22,14 @@
       .grid {
         display: grid;
         grid-template-columns: repeat(2, 200px);
+        gap: 1rem;
+        /* initial spacing between charts */
+        transition: gap 0.8s ease-in-out;
+      }
+
+      .grid.tight {
         gap: 0;
-        /* no space between cells */
-        position: relative;
+        /* remove spacing to merge into big chart */
       }
 
       .chart {
@@ -38,14 +43,6 @@
         font-size: 1.5rem;
         transition: transform 0.8s ease-in-out;
         transform-origin: center;
-        position: relative;
-        z-index: 2;
-      }
-
-      .chart.animate {
-        transform: rotateY(180deg) scale(1.15);
-        z-index: 2;
-        transition: transform 0.8s ease-in-out;
       }
 
       .rotate .chart {
@@ -56,6 +53,7 @@
         margin-top: 2rem;
         padding: 0.5rem 1rem;
         font-size: 1rem;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -69,14 +67,15 @@
       <div class="chart" id="chart4">Chart 4</div>
     </div>
 
-    <button id="rotateBtn">Rotate Charts</button>
+    <button id="rotateBtn">Rotate + Merge</button>
 
     <script>
       const grid = document.getElementById('chartGrid');
       const btn = document.getElementById('rotateBtn');
 
       btn.addEventListener('click', () => {
-        grid.classList.toggle('rotate');
+        grid.classList.add('tight');        // remove gap
+        grid.classList.toggle('rotate');    // trigger rotation
       });
     </script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
