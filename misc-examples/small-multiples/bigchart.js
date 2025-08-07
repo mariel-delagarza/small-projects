@@ -3,6 +3,9 @@ Highcharts.chart("big-chart", {
     text: "Big Title",
     align: "left",
   },
+  chart: {
+    margin: [50, 50, 50, 50],
+  },
   legend: {
     enabled: false,
   },
