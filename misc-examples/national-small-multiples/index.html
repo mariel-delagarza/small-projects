@@ -51,7 +51,6 @@
         font-size: 1.5rem;
         position: relative;
         z-index: 2;
-        outline: 2px solid #91a0ba;
       }
 
       #big-chart {
@@ -97,9 +96,8 @@
         visibility: visible;
         opacity: 1;
         pointer-events: auto;
-        transition: opacity 0.5s ease-in-out;
+        transition: opacity 0.3s ease-in-out;
         z-index: 2;
-        outline: 1px solid red;
       }
 
       button {
@@ -254,7 +252,7 @@
           // Delay fade-in of big chart slightly
           setTimeout(() => {
             bigChart.classList.add('show');
-          }, 500); // slightly before rotation finishes
+          }, 250); // slightly before rotation finishes
         } else {
           bigChart.classList.remove('show');
         }
