@@ -1,28 +1,25 @@
 Highcharts.chart("big-chart", {
   title: {
-    text: "All States",
+    text: 'HI',
+    align: "left",
+    style: {
+      fontSize: '14px',
+      color: '#000'
+    }
+  },
+  chart: {
+    backgroundColor: '#fff'
+  },
+  credits: {
+    enabled: false
+  },
+  subtitle: {
+    text: '',
     align: "left",
   },
   legend: {
-    enabled: false,
+    enabled: false
   },
-  subtitle: {
-    text: "",
-    align: "left",
-  },
-
-  yAxis: {
-    title: {
-      text: "",
-    },
-  },
-
-  xAxis: {
-    accessibility: {
-      rangeDescription: "Range: 2010 to 2022",
-    },
-  },
-
   plotOptions: {
     series: {
       label: {
@@ -31,31 +28,12 @@ Highcharts.chart("big-chart", {
       pointStart: 2010,
     },
   },
-
   series: [
     {
-      name: "",
-      data: [40, 48, 65, 82, 33, 28, 67],
+      data: [
+        43934, 48656, 65165, 81827, 112143, 142383, 171533, 165174, 155157,
+        161454, 154610, 168960, 171558,
+      ],
     },
-  ],
-
-  credits: {
-    enabled: false,
-  },
-  responsive: {
-    rules: [
-      {
-        condition: {
-          maxWidth: 500,
-        },
-        chartOptions: {
-          legend: {
-            layout: "horizontal",
-            align: "center",
-            verticalAlign: "bottom",
-          },
-        },
-      },
-    ],
-  },
+  ]
 });
