@@ -249,6 +249,12 @@
 
       moveAllBtn.addEventListener('click', () => {
         console.log("Moving All Charts");
+
+        // Show the big chart with a short delay for smoothness
+        setTimeout(() => {
+          bigChart.classList.add('show');
+        }, 500); // match the animation delay
+        
         Object.keys(squarePositions).forEach(chartId => {
           const chartEl = document.getElementById(chartId);
           if (!chartEl) return;
