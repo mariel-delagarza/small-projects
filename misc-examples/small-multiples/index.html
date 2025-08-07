@@ -73,9 +73,15 @@
       const grid = document.getElementById('chartGrid');
       const btn = document.getElementById('rotateBtn');
 
+      let rotated = false;
+
       btn.addEventListener('click', () => {
-        grid.classList.add('tight');        // remove gap
-        grid.classList.toggle('rotate');    // trigger rotation
+        rotated = !rotated;
+
+        grid.classList.toggle('rotate', rotated);
+        grid.classList.toggle('tight', rotated);
+
+        btn.textContent = rotated ? 'Undo Merge' : 'Rotate + Merge';
       });
     </script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
