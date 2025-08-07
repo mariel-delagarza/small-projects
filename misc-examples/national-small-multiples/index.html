@@ -273,7 +273,7 @@
         // Show the big chart with a short delay for smoothness
         setTimeout(() => {
           bigChart.classList.add('show');
-        }, 500); // match the animation delay
+        }, 0.1); // match the animation delay
 
         Object.keys(squarePositions).forEach(chartId => {
           const chartEl = document.getElementById(chartId);
