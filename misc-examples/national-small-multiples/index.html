@@ -150,8 +150,7 @@
     </div>
 
     <button id="rotateBtn">Rotate + Merge</button>
-    <button id="moveOneBtn">Move Chart 49</button>
-    <button id="moveAllBtn">Move All Charts</button>
+    <button id="moveAllBtn">Move All + Merge</button>
 
     <script>
       const grid = document.getElementById('chartGrid');
@@ -244,19 +243,9 @@
 
 
       /*Sliding Squares*/
-      const chart49 = document.getElementById("chart49");
       const chartGrid = document.getElementById("chartGrid");
-      const moveOneBtn = document.getElementById('moveOneBtn');
       const moveAllBtn = document.getElementById('moveAllBtn');
 
-
-      moveOneBtn.addEventListener('click', () => {
-        const originalCol = squarePositions.chart49[0];
-        const originalRow = squarePositions.chart49[1];
-        const [newCol, newRow] = [squarePositions.chart49[2], squarePositions.chart49[3]];
-        console.log("Moving Chart 49");
-        moveChartTo(chart49, originalCol, originalRow, newCol, newRow);
-      });
 
       moveAllBtn.addEventListener('click', () => {
         console.log("Moving All Charts");
