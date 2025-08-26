@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Mason Jar – Curved Bottom Liquid Fill</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root{
+    --bg:#0b0b0b;
+    --glass:#99d6ff22;
+    --stroke:#7ec7ffaa;
+    --liquid1:#5ec6ff;
+    --liquid2:#3aa6e6;
+    --highlight:#bfe7ff;
+  }
+  html,body{height:100%;margin:0;background:var(--bg);color:#e8f6ff;
+            font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{display:grid;place-items:center;gap:1rem;height:100%}
+  svg{width:360px;height:auto}
+  .controls{display:flex;gap:.75rem;align-items:center;font-size:14px;flex-wrap:wrap}
+  input[type="range"]{width:320px}
+  .percent{width:3ch;text-align:right;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- ViewBox sized so math is easy -->
+  <svg viewBox="0 0 512 768" role="img" aria-labelledby="title desc">
+    <title id="title">Liquid fill with curved jar bottom</title>
+    <desc id="desc">Animated waves are clipped to a mason jar shape with an elliptical bottom.</desc>
+
+    <defs>
+      <!-- ======= Mason jar interior used for clipping the liquid ======= -->
+      <!-- Tweak these numbers to match any jar: -->
+      <!-- Inner walls: x from L=150 to R=362; liquid can rise from TOP to an elliptical bottom centered at CX, CY -->
+      <!-- Ellipse radii: RX (horizontal), RY (vertical) shape the curvature of the bottom -->
+      <clipPath id="jar-clip">
+        <!-- Path: down left wall -> elliptical arc across bottom -> up right wall -> close -->
+        <!-- From (L, BOTY) arc to (R, BOTY) with rx,ry; sweep-flag=1 gives “bulge downward” -->
+        <path id="jar-inner-path"
+              d="M 150,120
+                 L 150,560
+                 A 112 58 0 0 1 362,560
+                 L 362,120
+                 Z"/>
+      </clipPath>
+
+      <!-- Optional subtle glass gradient -->
+      <linearGradient id="glass-grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="white" stop-opacity=".05"/>
+        <stop offset=".5" stop-color="white" stop-opacity=".0"/>
+        <stop offset="1" stop-color="white" stop-opacity=".06"/>
+      </linearGradient>
+    </defs>
+
+    <!-- ======= Jar outline (stylized; replace with your own outline if desired) ======= -->
+    <g opacity="0.95">
+      <!-- Neck/rim -->
+      <rect x="178" y="78" width="156" height="28" rx="10" ry="10"
+            fill="none" stroke="var(--stroke)" stroke-width="4"/>
+      <!-- Outer body stroke (rounded rectangle with curved base look) -->
+      <path d="
+        M 140,110
+        C 140,90 165,72 200,68
+        L 312,68
+        C 347,72 372,90 372,110
+        L 372,552
+        C 372,685 140,685 140,552
+        Z"
+        fill="none" stroke="var(--stroke)" stroke-width="4"/>
+      <!-- Soft glass tint inside -->
+      <use href="#jar-inner-path" fill="var(--glass)"/>
+      <!-- Vertical highlight -->
+      <path d="M158,160 C158,400 176,520 210,560" fill="none"
+            stroke="var(--highlight)" stroke-opacity=".25" stroke-width="3"/>
+    </g>
+
+    <!-- ======= Liquid, clipped to jar interior with a CURVED bottom ======= -->
+    <g clip-path="url(#jar-clip)">
+      <!-- Base fill so the whole volume has color -->
+      <rect x="0" y="0" width="512" height="768" fill="var(--liquid2)" opacity="0.85"/>
+      <!-- Two animated wave surfaces (front/back for parallax) -->
+      <path id="wave-back" fill="var(--liquid2)" opacity="0.95"></path>
+      <path id="wave-front" fill="var(--liquid1)" opacity="0.95"></path>
+    </g>
+
+    <!-- Percentage label -->
+    <g transform="translate(256,48)" text-anchor="middle" font-weight="700" font-size="18">
+      <text id="pct">0%</text>
+    </g>
+  </svg>
+
+  <div class="controls">
+    <span>Fill:</span>
+    <input id="slider" type="range" min="0" max="100" value="68" />
+    <span class="percent" id="readout">68</span><span>%</span>
+    <button id="pulse">Pulse</button>
+  </div>
+</div>
+
+<script>
+/* ======= CONFIG: match these to the clip path numbers above ======= */
+const L = 150;       // inner left wall x
+const R = 362;       // inner right wall x
+const TOP = 120;     // top y where liquid can start (under rim)
+const BOT_Y = 560;   // y where the *arc endpoints* touch walls
+const RX = 112;      // ellipse radius x  (curvature width)
+const RY = 58;       // ellipse radius y  (curvature height)
+
+/* ======= Elements ======= */
+const waveFront = document.getElementById('wave-front');
+const waveBack  = document.getElementById('wave-back');
+const pctText   = document.getElementById('pct');
+const slider    = document.getElementById('slider');
+const readout   = document.getElementById('readout');
+const pulseBtn  = document.getElementById('pulse');
+
+/* ======= Animation state ======= */
+let t = 0;
+let level = 0;                         // 0..1
+let target = slider.value / 100;
+let pulse = 0;
+
+slider.addEventListener('input', () => {
+  target = slider.value / 100;
+  readout.textContent = slider.value;
+});
+pulseBtn.addEventListener('click', () => { pulse = 1; });
+
+/* Build a closed wave surface that will be clipped by the jar.
+   We don’t have to draw the curved bottom here — the clipPath provides it.
+   We draw: from left wall up to the wave, across with sine, down to bottom,
+   then back to start (the clip trims excess neatly to the curved base). */
+function wavePath({phase=0, amp=10, freq=2.6, y, steps=56}) {
+  const step = (R - L) / steps;
+  let d = `M ${L},${BOT_Y} L ${L},${y}`;
+  for (let i = 0; i <= steps; i++) {
+    const x = L + i * step;
+    const theta = (i / steps) * Math.PI * freq + phase;
+    const yy = y + Math.sin(theta) * amp;
+    d += ` L ${x},${yy}`;
+  }
+  d += ` L ${R},${BOT_Y} Z`;
+  return d;
+}
+
+function tick() {
+  // ease to target
+  level += (target - level) * 0.06;
+
+  // map level to y within TOP..BOT_Y (0=empty at arc, 1=full toward top)
+  const y = BOT_Y - (BOT_Y - TOP) * level;
+
+  // wobble proportional to level change + optional pulse
+  const wob = (target - level) * 24 + (pulse > 0 ? Math.sin(t * 3) * 5 : 0);
+  pulse = Math.max(0, pulse - 0.02);
+
+  t += 0.015;
+
+  waveBack.setAttribute('d',  wavePath({phase: t * 0.9, amp: 7 + wob * 0.15, freq: 2.2, y}));
+  waveFront.setAttribute('d', wavePath({phase: t * 1.3 + Math.PI/6, amp: 11 + wob * 0.25, freq: 3.0, y}));
+
+  pctText.textContent = Math.round(level * 100) + '%';
+
+  requestAnimationFrame(tick);
+}
+readout.textContent = slider.value;
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
