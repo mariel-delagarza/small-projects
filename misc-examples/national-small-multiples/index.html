@@ -167,7 +167,6 @@
     </div>
 
     <button id="rotateBtn">Rotate + Merge</button>
-    <button id="moveAllBtn">Move All + Merge</button>
 
     <script>
       const grid = document.getElementById('chartGrid');
@@ -257,69 +256,6 @@
           bigChart.classList.remove('show');
         }
       });
-
-
-      /*Sliding Squares*/
-      const chartGrid = document.getElementById("chartGrid");
-      const moveAllBtn = document.getElementById('moveAllBtn');
-
-
-      moveAllBtn.addEventListener('click', () => {
-        bigChart.classList.add('move')
-        console.log("Moving All Charts");
-
-        // Show the big chart with a short delay for smoothness
-        setTimeout(() => {
-          bigChart.classList.add('show');
-        }, 0.1); // match the animation delay
-
-        Object.keys(squarePositions).forEach(chartId => {
-          const chartEl = document.getElementById(chartId);
-          if (!chartEl) return;
-
-          const originalCol = squarePositions[chartId][0];
-          const originalRow = squarePositions[chartId][1];
-          const [newCol, newRow] = [squarePositions[chartId][2], squarePositions[chartId][3]];
-
-          moveChartTo(chartEl, originalCol, originalRow, newCol, newRow);
-        });
-      });
-
-      function moveChartTo(chartEl, fromCol, fromRow, toCol, toRow) {
-        const gridRect = chartGrid.getBoundingClientRect();
-        const chartRect = chartEl.getBoundingClientRect();
-
-        const currentLeft = chartRect.left - gridRect.left;
-        const currentTop = chartRect.top - gridRect.top;
-
-        const cellWidth = chartGrid.offsetWidth / 12;
-        const cellHeight = chartGrid.offsetHeight / 8;
-
-        const targetLeft = (toCol - 1) * cellWidth;
-        const targetTop = (toRow - 1) * cellHeight;
-
-        // Animate to target
-        gsap.to(chartEl, {
-          duration: 0.6,
-          x: targetLeft - currentLeft,
-          y: targetTop - currentTop,
-          ease: "power2.out",
-          onComplete: () => {
-            // Snap back into grid
-            chartEl.style.transition = "";
-            chartEl.style.transform = "";
-            chartEl.style.position = "";
-            chartEl.style.top = "";
-            chartEl.style.left = "";
-            chartEl.style.width = "";
-            chartEl.style.height = "";
-            chartEl.style.zIndex = "";
-
-            chartEl.style.gridColumnStart = toCol;
-            chartEl.style.gridRowStart = toRow;
-          }
-        });
-      }
 
 
     </script>
