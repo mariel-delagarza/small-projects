@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotate and Merge Charts</title>
+    <link rel="stylesheet" href="national-squares.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        background: #0b1d51;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        overflow-x: hidden;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(8, 1fr);
+        gap: 0.5vw;
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+        position: relative;
+      }
+
+      .grid.tight {
+        gap: 0;
+      }
+
+
+      .chart {
+        width: 100%;
+        aspect-ratio: 1/1;
+        background: #fff;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      #big-chart {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 12/8;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out, visibility 0s linear 0.2s;
+        z-index: 1;
+      }
+
+      #big-chart.move {
+        position: absolute;
+        top: 31%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* perfect centering */
+        width: 84%;
+        height: 64%;
+        aspect-ratio: 12/8;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out, visibility 0s linear 0.2s;
+        z-index: 1;
+      }
+      
+
+      #big-chart.show {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 0.3s ease-in-out;
+        z-index: 2;
+      }
+
+      button {
+        margin-top: 2rem;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="grid" id="chartGrid">
+      <div class="chart" id="chart1">Chart 1</div>
+      <div class="chart" id="chart2">Chart 2</div>
+      <div class="chart" id="chart3">Chart 3</div>
+      <div class="chart" id="chart4">Chart 4</div>
+      <div class="chart" id="chart5">Chart 5</div>
+      <div class="chart" id="chart6">Chart 6</div>
+      <div class="chart" id="chart7">Chart 7</div>
+      <div class="chart" id="chart8">Chart 8</div>
+      <div class="chart" id="chart9">Chart 9</div>
+      <div class="chart" id="chart10">Chart 10</div>
+      <div class="chart" id="chart11">Chart 11</div>
+      <div class="chart" id="chart12">Chart 12</div>
+      <div class="chart" id="chart13">Chart 13</div>
+      <div class="chart" id="chart14">Chart 14</div>
+      <div class="chart" id="chart15">Chart 15</div>
+      <div class="chart" id="chart16">Chart 16</div>
+      <div class="chart" id="chart17">Chart 17</div>
+      <div class="chart" id="chart18">Chart 18</div>
+      <div class="chart" id="chart19">Chart 19</div>
+      <div class="chart" id="chart20">Chart 20</div>
+      <div class="chart" id="chart21">Chart 21</div>
+      <div class="chart" id="chart22">Chart 22</div>
+      <div class="chart" id="chart23">Chart 23</div>
+      <div class="chart" id="chart24">Chart 24</div>
+      <div class="chart" id="chart25">Chart 25</div>
+      <div class="chart" id="chart26">Chart 26</div>
+      <div class="chart" id="chart27">Chart 27</div>
+      <div class="chart" id="chart28">Chart 28</div>
+      <div class="chart" id="chart29">Chart 29</div>
+      <div class="chart" id="chart30">Chart 30</div>
+      <div class="chart" id="chart31">Chart 31</div>
+      <div class="chart" id="chart32">Chart 32</div>
+      <div class="chart" id="chart33">Chart 33</div>
+      <div class="chart" id="chart34">Chart 34</div>
+      <div class="chart" id="chart35">Chart 35</div>
+      <div class="chart" id="chart36">Chart 36</div>
+      <div class="chart" id="chart37">Chart 37</div>
+      <div class="chart" id="chart38">Chart 38</div>
+      <div class="chart" id="chart39">Chart 39</div>
+      <div class="chart" id="chart40">Chart 40</div>
+      <div class="chart" id="chart41">Chart 41</div>
+      <div class="chart" id="chart42">Chart 42</div>
+      <div class="chart" id="chart43">Chart 43</div>
+      <div class="chart" id="chart44">Chart 44</div>
+      <div class="chart" id="chart45">Chart 45</div>
+      <div class="chart" id="chart46">Chart 46</div>
+      <div class="chart" id="chart47">Chart 47</div>
+      <div class="chart" id="chart48">Chart 48</div>
+      <div class="chart" id="chart49">Chart 49</div>
+      <div class="chart" id="chart50">Chart 50</div>
+      <div id="big-chart">Big Chart</div>
+    </div>
+    </div>
+
+    <button id="rotateBtn">Rotate + Merge</button>
+
+    <script>
+      const grid = document.getElementById('chartGrid');
+      const rotateBtn = document.getElementById('rotateBtn');
+      const bigChart = document.getElementById('big-chart');
+
+      let rotated = false;
+
+      const squarePositions = {
+        "chart1": [12, 1, 8, 1],
+        "chart2": [12, 2, 9, 1],
+        "chart3": [12, 3, 10, 1],
+        "chart4": [11, 2, 11, 1],
+        "chart5": [11, 3, 11, 2],
+        "chart6": [11, 4, 10, 3],
+        "chart7": [11, 5, 11, 3],
+        "chart8": [10, 3, 10, 2],
+        "chart9": [10, 4, 9, 3],
+        "chart10": [10, 5, 11, 4],
+        "chart11": [10, 6, 10, 5],
+        "chart12": [10, 8, 11, 5],
+        "chart13": [9, 4, 9, 2],
+        "chart14": [9, 5, 10, 4],
+        "chart15": [9, 6, 9, 5],
+        "chart16": [9, 7, 8, 5],
+        "chart17": [8, 3, 8, 2],
+        "chart18": [8, 4, 8, 3],
+        "chart19": [8, 5, 9, 4],
+        "chart20": [8, 6, 8, 4],
+        "chart21": [8, 7, 7, 4],
+        "chart22": [7, 4, 7, 1],
+        "chart23": [7, 5, 7, 2],
+        "chart24": [7, 6, 7, 3],
+        "chart25": [7, 7, 6, 5],
+        "chart26": [6, 3, 6, 1],
+        "chart27": [6, 4, 6, 2],
+        "chart28": [6, 5, 6, 3],
+        "chart29": [6, 6, 6, 4],
+        "chart30": [6, 7, 5, 5],
+        "chart31": [5, 3, 5, 1],
+        "chart32": [5, 4, 5, 2],
+        "chart33": [5, 5, 5, 3],
+        "chart34": [5, 6, 5, 4],
+        "chart35": [5, 7, 4, 5],
+        "chart36": [5, 8, 7, 5],
+        "chart37": [4, 3, 4, 1],
+        "chart38": [4, 4, 4, 2],
+        "chart39": [4, 5, 4, 3],
+        "chart40": [4, 6, 4, 4],
+        "chart41": [4, 7, 3, 5],
+        "chart42": [3, 3, 3, 1],
+        "chart43": [3, 4, 3, 2],
+        "chart44": [3, 5, 3, 3],
+        "chart45": [3, 6, 3, 4],
+        "chart46": [2, 3, 2, 2],
+        "chart47": [2, 4, 2, 3],
+        "chart48": [2, 5, 2, 4],
+        "chart49": [1, 1, 2, 1],
+        "chart50": [1, 7, 2, 5]
+      }
+
+      const [originalCol, originalRow] = squarePositions["chart49"];
+      console.log(originalCol, originalRow);
+
+
+      rotateBtn.addEventListener('click', () => {
+        rotated = !rotated;
+
+        rotateBtn.textContent = rotated ? 'Undo Merge' : 'Rotate + Merge';
+
+        const chartEls = document.querySelectorAll('.chart');
+
+        chartEls.forEach(chart => {
+          gsap.to(chart, {
+            rotate: rotated ? 90 : 0,
+            duration: 0.6,
+            ease: 'power2.inOut',
+          });
+        });
+
+        if (rotated) {
+          // Delay fade-in of big chart slightly
+          setTimeout(() => {
+            bigChart.classList.add('show');
+          }, 250); // slightly before rotation finishes
+        } else {
+          bigChart.classList.remove('show');
+        }
+      });
+
+
+    </script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/themes/adaptive.js"></script>
+    <script src="charts/chart1.js"></script>
+    <script src="charts/chart2.js"></script>
+    <script src="charts/chart3.js"></script>
+    <script src="charts/chart4.js"></script>
+    <script src="charts/chart5.js"></script>
+    <script src="charts/chart6.js"></script>
+    <script src="charts/chart7.js"></script>
+    <script src="charts/chart8.js"></script>
+    <script src="charts/chart9.js"></script>
+    <script src="charts/chart10.js"></script>
+    <script src="charts/chart11.js"></script>
+    <script src="charts/chart12.js"></script>
+    <script src="charts/chart13.js"></script>
+    <script src="charts/chart14.js"></script>
+    <script src="charts/chart15.js"></script>
+    <script src="charts/chart16.js"></script>
+    <script src="charts/chart17.js"></script>
+    <script src="charts/chart18.js"></script>
+    <script src="charts/chart19.js"></script>
+    <script src="charts/chart20.js"></script>
+    <script src="charts/chart21.js"></script>
+    <script src="charts/chart22.js"></script>
+    <script src="charts/chart23.js"></script>
+    <script src="charts/chart24.js"></script>
+    <script src="charts/chart25.js"></script>
+    <script src="charts/chart26.js"></script>
+    <script src="charts/chart27.js"></script>
+    <script src="charts/chart28.js"></script>
+    <script src="charts/chart29.js"></script>
+    <script src="charts/chart30.js"></script>
+    <script src="charts/chart31.js"></script>
+    <script src="charts/chart32.js"></script>
+    <script src="charts/chart33.js"></script>
+    <script src="charts/chart34.js"></script>
+    <script src="charts/chart35.js"></script>
+    <script src="charts/chart36.js"></script>
+    <script src="charts/chart37.js"></script>
+    <script src="charts/chart38.js"></script>
+    <script src="charts/chart39.js"></script>
+    <script src="charts/chart40.js"></script>
+    <script src="charts/chart41.js"></script>
+    <script src="charts/chart42.js"></script>
+    <script src="charts/chart43.js"></script>
+    <script src="charts/chart44.js"></script>
+    <script src="charts/chart45.js"></script>
+    <script src="charts/chart46.js"></script>
+    <script src="charts/chart47.js"></script>
+    <script src="charts/chart48.js"></script>
+    <script src="charts/chart49.js"></script>
+    <script src="charts/chart50.js"></script>
+    <script src="charts/bigChart.js"></script>
+
+  </body>
+
+</html>
